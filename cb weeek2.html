@@ -1,0 +1,553 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>cb SpaceHey &mdash; a space for friends.</title>
+  
+
+<style>
+    
+    * { 
+        cursor: url('https://cur.cursors-4u.net/cursors/cur-11/cur1054.cur'), auto; 
+    }
+    a:hover {
+        cursor: url(https://cur.cursors-4u.net/cursors/cur-11/cur1049.cur), auto;
+    }
+    
+    
+    :root{
+        --headers: whitesmoke;
+        --text: whitesmoke; 
+        --names: whitesmoke;
+        --links: gray;
+        --background_image: url('https://wallpapercave.com/wp/wp2686927.jpg');
+        --font-family: "Courier New", cursive;
+        --curve: 0px;
+        --borders: 2px solid gray;
+    }
+    
+
+    
+    h3, h4, h5{color: var(--headers)!important;} 
+    a{color: var(--links) !important;}
+    p, h2, .count {color: var(--text);} 
+    .friends a p{color: var(--names);} 
+    nav label{color: var(--links);}
+    .section h4 {color: var(--headers);} 
+    .blurbs .heading {display:none;} 
+    .details p:last-child{color: var(--text);} 
+    
+ 
+    
+    body{
+        background-image: var(--background_image);
+        background-size: contain;
+        background-position: center;
+        background-color: dimgray;
+    }
+    
+    h1{
+        color: white;
+        font-family: var(--font-family);
+        font-size:30px !important;
+        font-weight: 1;
+        border: var(--borders);
+        background-color: black;
+        padding:5px;
+        text-align: center;
+    }
+    
+   
+    nav{
+        background-color: black;
+        border: var(--borders);
+        border-radius: var(--curve);
+        text-align: center;
+    }
+    
+    nav .top, nav .links {
+        background-color: transparent;
+        border-radius: var(--curve);
+    }
+    nav .links a{
+        text-shadow:none;
+    }
+    
+    
+    
+    nav .links li:not(:last-child)::after,
+    footer .links li:not(:last-child)::after{
+        content: "|";
+        color: white;
+    }
+    
+    nav img.logo{
+        filter: brightness(0) saturate(100%) invert(50%) sepia(5%) saturate(326%) hue-rotate(174deg) brightness(92%) contrast(82%) !important;
+    }
+    
+   
+    
+    .search-wrapper input[type=text] {
+        background-color: transparent !important;
+        border: 2px solid var(--links) !important;
+        color:var(--links) !important;
+        border-radius: var(--curve) !important;
+    }
+    
+    button{
+        border-radius: var(--curve) !important;
+        border: 0px solid var(--links) !important;
+        font-family: var(--font-family) !important;
+        background-color: transparent !important;
+        color:var(--links) !important;
+    }
+
+    
+    .online{
+        color: var(--links) !important;
+        text-transform: lowercase;
+        text-align: right;
+    } 
+    .online img{
+        filter: brightness(0) saturate(100%) invert(50%) sepia(5%) saturate(326%) hue-rotate(174deg) brightness(92%) contrast(82%);
+    }
+    
+    
+    
+    a, p, b, nav label, .section{ 
+        font-family: var(--font-family);	
+        font-size: 12px;
+        font-weight: 1;
+        text-shadow: 0px 0px 0px black;
+    }
+    h2, h3, h4, h5{
+        font-family: var(--font-family);
+        font-size: 16px;
+        text-align: center;
+        font-weight: 1;
+        text-shadow: 0px 0px 0px black;
+    }
+    
+   
+    
+    hr{
+        height:2px;
+        background: gray;
+        border: none;
+    }
+    
+ 
+    .blurbs, .mood, .friends, .contact, .profile .table, .blog-preview, .profile .table-section{
+        border-radius: var(--curve);
+        border: var(--borders)!important;
+        background-color: black!important;
+    }
+    .comment-replies{border:4px groove gray;} 
+    .comment-reply:not(:first-child){border-top: 2px solid var(--links);} 
+    
+   
+    td{
+        background-color: transparent!important;
+    }
+    
+    
+    main{
+        background: transparent;
+        border-radius: var(--curve);
+        border: transparent;
+        outline: none;
+    }
+    
+
+    .table-section{
+        border:none !important;
+        border-radius: var(--curve) !important;
+    }
+    
+  
+    .heading{
+        background: none !important;
+    }
+   
+    
+    .profile-info {
+        background-color: black !important;
+        border: var(--borders) !important;
+        border-radius: var(--curve) !important;
+    }
+    
+  
+    .profile-pic{
+        padding: 10px;
+    }
+    
+    .friends-grid{
+        text-align: center;
+    }
+    
+   
+    
+    h2, h3, h4, h5, p{padding-left:5px !important;} 
+    .contact .heading, .profile .table-section .heading, .blog-preview .heading, .profile .friends .heading, .mood{padding: 5px!important;text-align: center;}
+    .mood, .friends{margin-bottom: 10px;}
+    
+    .url-info{display: none;}
+    .general-about .details{
+        background: black;
+        border: var(--borders);
+        padding-bottom: 70px;
+        margin-bottom: 10px;
+    }
+    .contact{
+        padding: 5px
+    }
+    .contact .f-col{
+        padding: 0px 0px 7px;
+    }
+    .f-row{
+        margin:0px!important;
+    }
+   
+    
+    .comments-table {
+        display: block;
+        height: 500px!important;
+        overflow-y: scroll;
+        outline: none !important;
+        border-radius: 3px;
+        border-spacing: 6px;
+        border: transparent;
+    }
+    .comments-table td{
+        border: 2px solid gray;
+    }
+    
+    footer{
+        background: black;
+        border: var(--borders);
+        padding:10px;
+        margin-top: 10px;
+    }
+ 
+    </style>
+    
+    <style>
+  
+    ::-webkit-scrollbar {
+        width: 5px;
+        height: 12px;
+    }
+    ::-webkit-scrollbar-track {
+        border-radius: var(--curve);
+        border: 1px solid black;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: gray; 
+        border-radius: var(--curve);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: black;  
+    }
+    </style>
+  
+  <link rel="preconnect" href="https://static.spacehey.net" crossorigin>
+  <link rel="preconnect" href="https://cdn.spacehey.net" crossorigin>
+
+  <script src="https://spacehey.com/js/script.js?v=0.39" async></script>
+  
+  
+  <!-- <link rel="stylesheet" href="style2.css"> -->
+
+
+  <link rel="stylesheet" href="https://spacehey.com/css/normalize.css">
+  <!-- <link rel="stylesheet" href="https://spacehey.com/css/my.css?c=b714a7592cbd5d57cf3e3ed4e9db8cb190a12b5ce185e8b7f33d12ea952e6aab"> -->
+
+  
+  <link rel="dns-prefetch" href="https://static.spacehey.net">
+  <link rel="dns-prefetch" href="https://cdn.spacehey.net">
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://spacehey.com/favicon.ico?v=2">
+
+  <meta name="title" content="SpaceHey &mdash; a space for friends.">
+  <meta name="description" content="SpaceHey is a retro social network focused on privacy and customizability. It's a friendly place to have fun, meet friends, and be creative. Join for free!">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SpaceHey &mdash; a space for friends.">
+  <meta property="og:description" content="SpaceHey is a retro social network focused on privacy and customizability. It's a friendly place to have fun, meet friends, and be creative. Join for free!">
+  <meta property="og:image" content="https://spacehey.com/img/meta_o.png">
+  <meta property="og:site_name" content="SpaceHey">
+
+  <meta property="twitter:site" content="@spacehey">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="SpaceHey &mdash; a space for friends.">
+  <meta property="twitter:description" content="SpaceHey is a retro social network focused on privacy and customizability. It's a friendly place to have fun, meet friends, and be creative. Join for free!">
+  <meta property="twitter:image" content="https://spacehey.com/img/meta_o.png">
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="https://spacehey.com/img/favicons/apple-touch-icon.png"> 
+  <link rel="icon" type="image/png" sizes="32x32" href="https://spacehey.com/img/favicons/favicon-32x32.png"> 
+  <link rel="icon" type="image/png" sizes="16x16" href="https://spacehey.com/img/favicons/favicon-16x16.png">
+  <link rel="mask-icon" href="https://spacehey.com/img/favicons/safari-pinned-tab.svg" color="#1D4ED8">
+  <link rel="manifest" href="https://spacehey.com/img/favicons/site.webmanifest"> 
+  <meta name="apple-mobile-web-app-title" content="SpaceHey">
+  <meta name="application-name" content="SpaceHey">
+  <meta name="msapplication-TileColor" content="#1D4ED8">
+  <meta name="msapplication-config" content="https://spacehey.com/img/favicons/browserconfig.xml">
+  <meta name="theme-color" content="#1D4ED8">
+
+  <link href="https://spacehey.com/opensearch.xml" rel="search" title="Search SpaceHey" type="application/opensearchdescription+xml">
+
+ <link rel="canonical" href="https://spacehey.com"><script type="application/ld+json">[{"@context":"https:\/\/schema.org","@type":"Organization","name":"SpaceHey","slogan":"a space for friends","url":"https:\/\/spacehey.com","logo":"https:\/\/spacehey.com\/img\/logo_square.png","email":"support@spacehey.com","sameAs":["https:\/\/twitter.com\/spacehey","https:\/\/www.instagram.com\/spacehey","https:\/\/www.facebook.com\/spacehey","https:\/\/www.youtube.com\/spacehey","https:\/\/www.tiktok.com\/@spacehey","https:\/\/www.wikidata.org\/wiki\/Q107123627","https:\/\/en.wikipedia.org\/wiki\/Spacehey"],"parentOrganization":{"@type":"Organization","name":"Tibush GmbH","url":"https:\/\/tibush.com","logo":"https:\/\/tibush.com\/images\/logo.png","email":"info@tibush.com"}},{"@context":"https:\/\/schema.org","@type":"WebSite","url":"https:\/\/spacehey.com","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/spacehey.com\/search?q={search_term_string}"},"query-input":"required name=search_term_string"}}]</script>  
+</head>
+<body data-base="https://spacehey.com">
+<!-- [spacehey.com] SpaceHey Server: webserver-2 -->
+
+<div class="container">
+  <nav class="">
+            <div class="top">
+      <div class="left">
+        <a href="https://spacehey.com">
+                    <img class="logo logo-fallback" src="https://static.spacehey.net/img/logo_optimized.svg" alt="SpaceHey" fetchpriority="high" style="aspect-ratio: 55/14;">
+        </a>
+                                          </div>
+      <div class="center">
+                              <form action="https://spacehey.com/search" role="search">
+                          <label for="q">Search Users:</label>
+              <div class="search-wrapper">
+                <input id="q" type="text" name="q" autocomplete="off">
+              </div>
+              <button type="submit">Search</button>
+            </form>
+                        </div>
+      <div class="right">
+        <a href="https://spacehey.com/help" rel="help">Help</a> | <a href="https://spacehey.com/login">LogIn</a> | <a href="https://spacehey.com/signup">SignUp</a>                        </div>
+    </div>
+        <ul class="links">
+            <li class="active"><a href="https://spacehey.com">Home</a></li>
+      <li class=""><a href="https://spacehey.com/browse">Browse</a></li>
+      <li class=""><a href="https://spacehey.com/search">Search</a></li>
+      <li class=""><a href="https://im.spacehey.com">Messages</a></li>
+      <li class=""><a href="https://blog.spacehey.com">Blog</a></li>
+      <li class=""><a href="https://spacehey.com/bulletins">Bulletins</a></li>
+      <li class=""><a href="https://forum.spacehey.com/">Forum</a></li>
+      <li class=""><a href="https://groups.spacehey.com">Groups</a></li>
+      <li class=""><a href="https://layouts.spacehey.com">Layouts</a></li>
+            <li class=""><a href="https://spacehey.com/favorites">Favorites</a></li>
+      <li class=""><a href="https://spacehey.com/invite">Invite</a></li>
+            <li><a href="https://shop.spacehey.com/">Shop</a></li>
+      <li class=""><a href="https://spacehey.com/about">About</a></li>
+      <li class="special "><a href="https://spacehey.com/artproject">Art </a></li>
+          </ul>
+    </nav>
+  <main>
+
+  <div class="row home">
+    <div class="col w-60 left">
+      <div class="new-people cool">
+        <div class="top">
+          <h4>Cool New People</h4>
+        </div>
+        <div class="inner">
+                    <div class="person ">
+            <a href="/profile?id=2108333">
+              <p>⊹ʝօყ₊˚✧</p>
+            </a>
+            <a href="/profile?id=2108333">
+              <img class="pfp-fallback" src="https://cdn.spacehey.net/profilepics/2108333_152167ddf51c9b2b09e71677e17dd49d.png?token=oXhG6H22PYb2naxyhQZw2HXthc_H1gIjEc3OCsSGGvM&expires=1700242715" alt="⊹ʝօყ₊˚✧'s profile picture" loading="lazy" style="aspect-ratio: 1/1;">
+            </a>
+          </div>
+                    <div class="person ">
+            <a href="/profile?id=2108331">
+              <p>oleander</p>
+            </a>
+            <a href="/profile?id=2108331">
+              <img class="pfp-fallback" src="https://cdn.spacehey.net/profilepics/2108331_a7c93341f50a0ce9885d2596e21f174c.jpg?token=3oorceMjxccFOfjzgfpmg-p1-aDLBNM6bySxdg6rJCU&expires=1700242395" alt="oleander's profile picture" loading="lazy" style="aspect-ratio: 1/1;">
+            </a>
+          </div>
+                    <div class="person ">
+            <a href="/profile?id=2108322">
+              <p>Rem</p>
+            </a>
+            <a href="/profile?id=2108322">
+              <img class="pfp-fallback" src="https://cdn.spacehey.net/profilepics/2108322_a399bb95e72ff66d75dce9e710b0b3fe.jpg?token=Pt7X829SeIls5PAyHtsNIxn1shgbF9BtV71-_0bhiSA&expires=1700242374" alt="Rem's profile picture" loading="lazy" style="aspect-ratio: 1/1;">
+            </a>
+          </div>
+                    <div class="person ">
+            <a href="/profile?id=2108321">
+              <p>𝔈𝔰𝔩𝔞𝔪 ✮</p>
+            </a>
+            <a href="/profile?id=2108321">
+              <img class="pfp-fallback" src="https://cdn.spacehey.net/profilepics/2108321_a8f07b8c9f9a04fe26dbcdfc280003f8.jpg?token=V-pFpdAjrK3rTZm6gNRX_uXk4bwAbgt9lpunxEYrF5g&expires=1700241965" alt="𝔈𝔰𝔩𝔞𝔪 ✮'s profile picture" loading="lazy" style="aspect-ratio: 1/1;">
+            </a>
+          </div>
+                    <div class="view-more d-hide">
+            <a href="/browse?view=new">
+              <p>[view more]</p>
+            </a>
+          </div>
+        </div>
+      </div>
+            <div class="music">
+        <div class="heading">
+          <h4>SpaceHey Music</h4>
+          <a class="more" href="/topmusic">[more music]</a>
+        </div>
+        <div class="inner">
+          <div class="cover">
+            <a href="/topmusic">
+              <img src="https://external-media.spacehey.net/media/sUM3iUf5VZhUNoyaO3jsgofXmzcxwN8p4x3NFnuSVkoQ=/https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/c1/95/0e/c1950e0a-3fc8-83c2-8913-a14dd33bfe62/075679664990.jpg/200x200bb.jpg" alt="cover" loading="lazy">
+            </a>
+          </div>
+          <div class="details">
+            <h4><a href="/topmusic">Lovin On Me</a></h4>
+            <h5>
+              <span class="ex" title="Explict">E</span>Jack Harlow            </h5>
+            <p>
+              Check out the new trending Hip-Hop/Rap Song from Jack Harlow: <i>Lovin On Me</i>!
+            </p>
+            <p><b>&raquo; <a href="/topmusic">Listen Now</a></b></p>
+          </div>
+        </div>
+      </div>
+                      <div class="specials">
+        <div class="heading">
+          <h4>SpaceHey Announcements</h4>
+        </div>
+        <div class="inner">
+          <div class="image">
+            <a href="https://shop.spacehey.com/">
+              <img src="https://static.spacehey.net/img/shop/slides/merch3.jpg" alt="SpaceHey Merchandise Photo" loading="lazy">
+            </a>
+          </div>
+          <div class="details" lang="en">
+            <h4><a href="https://shop.spacehey.com/">SpaceHey Merchandise</a></h4>
+            <p><i>Now available!</i> Support SpaceHey by buying a high-quality Shirt, Hoodie, Sweater or Cup! <span class="m-hide">Check out the full Collection on <a href="https://shop.spacehey.com/">shop.spacehey.com</a>!</span></p>
+            <p><b>&raquo; <a href="https://shop.spacehey.com/">Shop Now!</a></b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col right">
+      <div class="welcome">
+        <img class="logo-fallback" src="https://static.spacehey.net/img/logo_optimized.svg" alt="SpaceHey - a space for friends" style="aspect-ratio: 55/14;">
+      </div>
+      <div class="box">
+        <h4>Member Login/Signup</h4>
+        <form action="https://auth.spacehey.com" method="post" name="theForm" id="theForm">
+          <input name="client_id" type="hidden" value="web">
+          <table>
+            <tbody>
+              <tr class="email">
+                <td class="label"><label for="email">E-Mail:</label></td>
+                <td class="input"><input type="email" name="email" id="email" autocomplete="email" value="" required></td>
+              </tr>
+              <tr class="password">
+                <td class="label"><label for="password">Password:</label></td>
+                <td class="input"><input name="password" type="password" id="password" autocomplete="current-password" required></td>
+              </tr>
+              <tr class="remember">
+                <td></td>
+                <td>
+                  <input type="checkbox" name="remember" value="yes" id="checkbox" >
+                  <label for="checkbox">Remember my E-mail</label>
+                </td>
+              </tr>
+              <tr class="buttons">
+                <td></td>
+                <td>
+                  <button type="submit" class="login_btn" name="action" value="login">Login</button>
+                  <button type="submit" class="signup_btn" name="action" value="signup">Sign Up!</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <a class="forgot" href="/reset">Forgot your password?</a>
+      </div>
+
+      <div class="value-info">
+        <p>
+          <i>
+            <img src="https://static.spacehey.net/icons2/plant.png" class="icon" aria-hidden="true" loading="lazy" alt=""> Servers powered by renewable energies
+          </i>
+        </p>
+        <p>
+          <i>
+            <img src="https://static.spacehey.net/icons2/lock.png" class="icon" aria-hidden="true" loading="lazy" alt=""> No tracking
+            <img src="https://static.spacehey.net/icons2/do_not_disturb.png" class="icon" aria-hidden="true" loading="lazy" alt=""> No algorithms
+          </i>
+        </p>
+      </div>
+
+      <div class="indie-box">
+        <p>
+          SpaceHey is a small, independent social network, funded by your donations.
+        </p>
+        <p>
+          <a href="/support" class="more-details">[more details]</a>
+        </p>
+        <a class="donate-link" href="https://www.paypal.com/donate/?hosted_button_id=N8SEE3KK4C538" target="_blank" rel="noopener">
+          <img class="donate-btn" src="https://static.spacehey.net/img/paypal_donate_with_cards.png" loading="lazy" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal">
+        </a>
+      </div>
+
+                </div>
+  </div>
+  <div class="row info-area">
+    <div class="col info-box">
+      <h3>Retro Social</h3>
+      <p>All the things you missed most about Social Networks are back: Bulletins, Blogs, Forums, and so much more!</p>
+      <p class="link">&raquo; <a href="/signup" title="Join SpaceHey Today">Join Today</a></p>
+    </div>
+    <div class="col info-box">
+      <h3>Privacy Friendly</h3>
+      <p>No algorithms, no tracking, no personalized Ads - just a safe space for you and your friends to hang out online!</p>
+      <p class="link">&raquo; <a href="/browse" title="Browse SpaceHey Profiles">Browse Profiles</a></p>
+    </div>
+    <div class="col info-box">
+      <h3>Fully Customizable</h3>
+      <p>Featuring custom HTML and CSS to give you all the freedom you need to make your Profile truly <i>your</i> Space on the web!</p>
+      <p class="link">&raquo; <a href="https://layouts.spacehey.com" title="Discover custom SpaceHey Layouts">Discover Layouts</a></p>
+    </div>
+    <div class="col info-box">
+      <h3>800 000 People</h3>
+      <p>Join over 800 000 others already on SpaceHey, have fun, and meet new like-minded people!</p>
+      <p class="link">&raquo; <a href="/signup" title="Sign Up for SpaceHey">SignUp Now</a></p>
+    </div>
+  </div>
+
+  </main>
+  <footer>
+    <p>
+      brought to you by <a href="https://tibush.com/labs" target="_blank" rel="noopener">tibush labs</a>
+          </p>
+    <p>       <i>Disclaimer: This is a fan-based project and is not affiliated with MySpace&reg; in any way.</i>
+    </p>
+    <ul class="links">
+            <li><a href="https://spacehey.com/about">About</a></li>
+      <li><a href="https://spacehey.com/news">News</a></li>
+      <li><a href="https://spacehey.com/rules">Rules</a></li>
+      <li><a href="https://spacehey.com/press/?portal">Press</a></li>
+      <li><a href="https://spacehey.com/brand">Brand</a></li>
+      <li><a href="https://spacehey.com/credits">Credits</a></li>
+      <li><a href="https://rss.spacehey.com">RSS</a></li>
+      <li><a href="https://spacehey.com/tos">Terms</a></li>
+      <li><a href="https://spacehey.com/privacy">Privacy</a></li>
+      <li><a href="https://spacehey.com/imprint">Imprint</a></li>
+      <li><a href="mailto:support@spacehey.com?subject=SpaceHey.com">Contact</a></li>
+      <li><a href="https://spacehey.com/report">Report Abuse</a></li>
+      <li><a href="https://status.spacehey.com">Status</a></li>
+      <li><a href="https://shop.spacehey.com/">SpaceHey Shop</a></li>
+    </ul>
+    <p class="copyright">
+      <a href="https://spacehey.com/">&copy;2023 SpaceHey.com All Rights Reserved.</a>
+    </p>
+  </footer>
+</div>
+
+
+<link rel="stylesheet" href="https://spacehey.com/css/important.css?c=994aafba76bf9205f4f293837ea21a3ecdfd1dbc4223ec4de3cac4e15c853257">
+
+</body>
+</html>
