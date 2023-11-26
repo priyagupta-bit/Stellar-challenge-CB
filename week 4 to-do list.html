@@ -1,0 +1,259 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+   
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+    <style>
+      body {
+        font-family: "Garamond", sans-serif;
+        margin: 20px;
+        background-color:burlywood;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      #todo-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      span {
+        color: #333;
+        font-family: "Lucida Console", "Courier New", monospace; 
+        border-radius: 25px;
+        border: 2px solid #333;
+        padding: 12px;
+      }
+
+      #categories {
+        margin-top: 20px;
+      }
+
+      button {
+        background-color:rgb(195, 176, 146);
+        color: #fff;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 5px;
+      }
+
+      button:hover {
+        background-color: rgb(212, 163, 115);
+      }
+
+      .task {
+        background-color: #f8f8f8;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 5px 0;
+        cursor: grab;
+        transition: background-color 0.3s;
+      }
+
+      .task:hover {
+        background-color: #e2e2e2;
+      }
+
+      .completed {
+        background-color: #d3ffd3;
+        text-decoration: line-through;
+      }
+
+      input,
+      select,
+      button {
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3><p>WEEK4: DOM Manipulation
+        <br>SUBMITTED BY: PRIYA CB23195</p></h>
+    <div id="todo-container">
+      <span>To-Do List</span>
+      <div id="categories">
+        <input type="centre"type="text" id="new-task-text" placeholder="Enter a new task" />
+      <input type="date" id="new-task-due-date" />
+      <select id="new-task-category">
+        <option value="Work">Work</option>
+        <option value="Personal"selected>Personal</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Others">Others</option>
+      </select>
+      <button onclick="addTask()">Add Task</button>
+      <button onclick="clearTasks()">Clear Tasks</button> </div> <br>
+        <div><button onclick="filterTasks('all')">All</button>
+        <button onclick="filterTasks('Personal')">Personal</button>
+        <button onclick="filterTasks('Shopping')">Shopping</button>
+        <button onclick="filterTasks('Work')">Work</button>
+        <button onclick="filterTasks('Others')">Others</button>
+      </div>
+      <ul type="circle"  id="task-list" ondrop="drop(event)" ondragover="allowDrop(event)">
+        
+      </ul>
+      
+    </div>
+     
+    <script>
+    
+      let tasks = [
+        {
+          id: 1,
+          text: "Python expt 8",
+          dueDate: "28-11-2023",
+          category: "work",
+          completed: false,
+        },
+        {
+          id: 2,
+          text: "Make a Doctor's Appointment",
+          dueDate: "2023-12-03",
+          category: "personal",
+          completed: false,
+        },
+        {
+          id: 3,
+          text: "Buy Stapler Pins",
+          dueDate: "2023-11-30",
+          category: "shopping",
+          completed: false,
+        },
+      ];
+
+      displayTasks(tasks);
+
+      function displayTasks(tasks) {
+        const taskList = document.getElementById("task-list");
+        taskList.innerHTML = ""; 
+
+        tasks.forEach((task) => {
+          const li = document.createElement("li");
+          li.draggable = true;
+          li.classList.add("task");
+          if (task.completed) {
+            li.classList.add("completed");
+          }
+          li.dataset.id = task.id; 
+
+          li.dataset.category = task.category;
+          li.innerHTML = `
+        ${task.text} 
+        <br/>
+        Category: ${task.category} - Due: ${task.dueDate} 
+        <br/>
+        <button onclick="completeTask(${task.id})">Completed</button>
+      `;
+
+          taskList.appendChild(li);
+        });
+
+        
+        addDragAndDrop();
+      }
+
+      function addTask() {
+        const newTaskText = document.getElementById("new-task-text").value;
+        const newTaskDueDate =
+          document.getElementById("new-task-due-date").value;
+        const newTaskCategory =
+          document.getElementById("new-task-category").value;
+
+        if (newTaskText.trim() === "") {
+          alert("Please enter a task.");
+          return;
+        }
+
+        const newTask = {
+          id: tasks.length + 1,
+          text: newTaskText,
+          dueDate: newTaskDueDate,
+          category: newTaskCategory,
+          completed: false,
+        };
+
+        tasks.push(newTask);
+        displayTasks(tasks);
+      }
+
+      function completeTask(taskId) {
+        const taskIndex = tasks.findIndex((task) => task.id === taskId);
+        tasks[taskIndex].completed = !tasks[taskIndex].completed;
+        displayTasks(tasks);
+      }
+
+      function addDragAndDrop() {
+        const tasksElements = document.querySelectorAll(".task");
+
+        tasksElements.forEach((taskElement) => {
+          taskElement.addEventListener("dragstart", (e) => {
+            e.dataTransfer.setData("text/plain", e.target.dataset.id);
+          });
+        });
+
+        const taskList = document.getElementById("task-list");
+
+        taskList.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          const draggedTaskId = e.dataTransfer.getData("text/plain");
+          const draggedTask = document.querySelector(
+            `[data-id='${draggedTaskId}']`,
+          );
+          const overTask = e.target.closest(".task");
+
+          if (overTask && overTask !== draggedTask) {
+            taskList.insertBefore(draggedTask, overTask);
+            updateTaskOrder();
+          }
+        });
+      }
+
+      function updateTaskOrder() {
+        const taskList = document.getElementById("task-list");
+        const updatedTasks = [];
+
+        taskList.childNodes.forEach((task, index) => {
+          const taskId = parseInt(task.dataset.id);
+          const taskIndex = tasks.findIndex((task) => task.id === taskId);
+          updatedTasks.push({ ...tasks[taskIndex] });
+        });
+
+        tasks = updatedTasks;
+        displayTasks(tasks);
+      }
+
+      function allowDrop(event) {
+        event.preventDefault();
+      }
+
+      function drop(event) {
+        event.preventDefault();
+      }
+
+      function filterTasks(category) {
+        const filteredTasks =
+          category === "all"
+            ? tasks
+            : tasks.filter((task) => task.category === category);
+        displayTasks(filteredTasks);
+      }
+
+      function clearTasks() {
+        tasks = [];
+        displayTasks(tasks);
+      }
+    </script>
+   
+</body>
+  </body>
+</html>
